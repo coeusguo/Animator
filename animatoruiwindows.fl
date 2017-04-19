@@ -1,0 +1,325 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.00 
+header_name {.h} 
+code_name {.cxx} 
+gridx 5 
+gridy 5 
+snap 3
+class ModelerUIWindows {open
+} {
+  Function {ModelerUIWindows()} {open
+  } {
+    Fl_Window m_pwndMainWnd {
+      label {CS 341 Animator (Sp02)}
+      xywh {47 31 589 705} color 185 labeltype NORMAL_LABEL when 0 visible
+    } {
+      Fl_Menu_Bar m_pmbMenuBar {selected
+        xywh {0 0 590 25} selection_color 137 labelsize 12 textsize 12
+      } {
+        submenu {} {
+          label {&File}
+          xywh {0 0 100 20}
+        } {
+          menuitem m_pmiOpenAniScript {
+            label {&Open Animation Script...}
+            xywh {0 0 100 20}
+          }
+          menuitem m_pmiSaveAniScript {
+            label {&Save Animation Script As...}
+            xywh {0 0 100 20} divider
+          }
+          menuitem m_pmiSaveBitmapFile {
+            label {S&ave Current Frame As...}
+            xywh {10 10 100 20} divider
+          }
+          menuitem m_pmiSaveMovie {
+            label {Sa&ve Movie As...}
+            xywh {0 0 100 20} divider
+          }
+          menuitem m_pmiExit {
+            label {E&xit}
+            xywh {10 10 100 20}
+          }
+        }
+        submenu {} {
+          label {&View}
+          xywh {10 10 100 20}
+        } {
+          menuitem m_pmiNormal {
+            label {&Normal}
+            xywh {10 10 100 20} type Radio value 1
+          }
+          menuitem m_pmiFlatShaded {
+            label {&Flat Shaded}
+            xywh {10 10 100 20} type Radio
+          }
+          menuitem m_pmiWireFrame {
+            label {&Wireframe}
+            xywh {20 20 100 20} type Radio divider
+          }
+          menuitem m_pmiHightQuality {
+            label {&High Quality}
+            xywh {10 10 100 20} type Radio
+          }
+          menuitem m_pmiMediumQuality {
+            label {&Medium Quality}
+            xywh {20 20 100 20} type Radio value 1
+          }
+          menuitem m_pmiLowQuality {
+            label {&Low Quality}
+            xywh {30 30 100 20} type Radio
+          }
+          menuitem m_pmiPoorQuality {
+            label {&Poor Quality}
+            xywh {40 40 100 20} type Radio
+          }
+        }
+        submenu {} {
+          label {&Animation}
+          xywh {0 0 100 20}
+        } {
+          menuitem m_pmiSetAniLen {
+            label {&Set Animation Length}
+            xywh {0 0 100 20}
+          }
+        }
+      }
+      Fl_Browser m_pbrsBrowser {
+        user_data this
+        xywh {5 55 145 440} type Multi selection_color 29 labeltype NO_LABEL textsize 10
+      }
+      Fl_Tabs m_ptabTab {
+        user_data this
+        xywh {155 30 430 510} color 185 align 0
+      } {
+        Fl_Scroll m_pscrlScroll {
+          label Modeler open
+          xywh {155 50 430 490} type VERTICAL_ALWAYS labelsize 12 when 1 hide resizable
+        } {
+          Fl_Pack m_ppckPack {
+            xywh {155 50 290 490} resizable
+            code0 {\#include "FL/Fl_Box.h"}
+            code1 {\#include "FL/Fl_Value_Slider.h"}
+          } {}
+        }
+        Fl_Group m_pgrpCurveGroup {
+          label Curves
+          xywh {160 55 425 435} labelsize 12
+        } {
+          Fl_Group {} {
+            private xywh {160 55 420 410} resizable
+          } {
+            Fl_Box {} {
+              label {Useless Box}
+              private xywh {160 55 40 20} box ENGRAVED_BOX labeltype NO_LABEL
+            }
+            Fl_Group m_pwndHRuler {
+              xywh {205 55 375 20} box ENGRAVED_BOX
+              code0 {\#include "rulerwindow.h"}
+              class RulerWindow
+            } {}
+            Fl_Group m_pwndVRuler {
+              xywh {160 80 40 385} box ENGRAVED_BOX
+              code0 {\#include "rulerwindow.h"}
+              code1 {m_pwndVRuler->type(RW_VERTICAL);}
+              class RulerWindow
+            } {}
+            Fl_Group m_pwndGraphWidget {
+              user_data this
+              xywh {205 80 375 385} box ENGRAVED_BOX resizable
+              code0 {\#include "graphwidget.h"}
+              class GraphWidget
+            } {}
+          }
+          Fl_Group {} {
+            xywh {160 470 420 20}
+          } {
+            Fl_Box {} {
+              label {Curve Type:}
+              xywh {160 470 75 20} labelsize 12 align 20
+            }
+            Fl_Choice m_pchoCurveType {
+              user_data this
+              xywh {230 470 115 20} labeltype NO_LABEL labelsize 12 textsize 12
+            } {
+              menuitem {} {
+                label Linear
+                xywh {10 10 100 20} labelsize 12
+              }
+              menuitem {} {
+                label {B-Spline}
+                xywh {10 10 100 20} labelsize 12
+              }
+              menuitem {} {
+                label Bezier
+                xywh {10 10 100 20} labelsize 12
+              }
+              menuitem {} {
+                label {Catmull-Rom}
+                xywh {10 10 100 20} labelsize 12
+              }
+              menuitem {} {
+                label {C2-Interpolating}
+                xywh {0 0 100 20} labelsize 12
+              }
+            }
+            Fl_Light_Button m_pbtWrap {
+              label Wrap
+              user_data this
+              xywh {345 470 70 20} labelsize 12
+            }
+            Fl_Button m_pbtZoomAll {
+              label {Z&oom All}
+              user_data this
+              xywh {505 470 75 20} labelsize 12
+            }
+          }
+        }
+      }
+      Fl_Group {} {
+        label {Animation Controls}
+        xywh {5 510 580 190} labeltype NO_LABEL
+      } {
+        Fl_Group {} {
+          label Playback
+          xywh {95 550 490 150} labeltype NO_LABEL resizable
+        } {
+          Fl_Group {} {
+            label {Playback Controls}
+            xywh {155 550 430 55} box ENGRAVED_BOX labeltype NO_LABEL
+          } {
+            Fl_Button m_pbtStepBack {
+              label {@|<}
+              user_data this
+              xywh {165 580 20 20} shortcut 0x7a labeltype SYMBOL_LABEL
+            }
+            Fl_Button m_pbtPlay {
+              label {@>}
+              user_data this
+              xywh {185 580 40 20} shortcut 0x78 labeltype SYMBOL_LABEL
+            }
+            Fl_Button m_pbtStepForw {
+              label {@>|}
+              user_data this
+              xywh {225 580 20 20} shortcut 0x63 labeltype SYMBOL_LABEL
+            }
+            Fl_Light_Button m_pbtLoop {
+              label {&Loop}
+              user_data this
+              xywh {250 580 50 20} labelsize 12
+            }
+            Fl_Light_Button m_pbtSimulate {
+              label {&Simulate}
+              user_data this
+              xywh {335 580 70 20} labelsize 12
+            }
+            Fl_Value_Slider m_psldrFPS {
+              label FPS
+              user_data this
+              xywh {470 580 100 20} type {Horz Knob} labelsize 12 align 4 minimum 5 maximum 30 step 1 value 30 resizable
+            }
+            Fl_Box {} {
+              label {Playback Controls}
+              xywh {165 555 135 20} labelsize 12 align 20
+            }
+          }
+          Fl_Group m_pwndIndicatorWnd {
+            user_data this
+            xywh {190 610 375 20} box ENGRAVED_BOX align 4 when 6 resizable
+            code0 {\#include "indicatorwindow.h"}
+            class IndicatorWindow
+          } {}
+          Fl_Slider m_psldrTimeSlider {
+            user_data this
+            xywh {185 635 390 20} type {Horz Knob}
+          }
+          Fl_Slider m_psldrPlayStart {
+            user_data this
+            xywh {185 655 390 20} type {Horz Knob} color 10
+          }
+          Fl_Slider m_psldrPlayEnd {
+            user_data this
+            xywh {185 675 390 20} type {Horz Knob} color 80
+          }
+          Fl_Box {} {
+            label {Time:}
+            xywh {95 635 90 20} labelsize 12 labelcolor 7 align 20
+          }
+          Fl_Box {} {
+            label {Start:}
+            xywh {95 655 90 20} labelsize 12 labelcolor 7 align 20
+          }
+          Fl_Box {} {
+            label {End:}
+            xywh {95 675 90 20} labelsize 12 labelcolor 7 align 20
+          }
+          Fl_Output m_poutTime {
+            label {Time:}
+            xywh {130 635 55 20} labeltype NO_LABEL labelsize 12 textsize 12
+          }
+          Fl_Output m_poutPlayStart {
+            label {Time:}
+            xywh {130 655 55 20} labeltype NO_LABEL labelsize 12 textsize 12
+          }
+          Fl_Output m_poutPlayEnd {
+            label {Time:}
+            xywh {130 675 55 20} labeltype NO_LABEL labelsize 12 textsize 12
+          }
+        }
+        Fl_Group {} {
+          label {partical system}
+          xywh {15 510 125 95} box ENGRAVED_BOX labeltype NO_LABEL
+        } {
+          Fl_Box {} {
+            label {Particle System}
+            xywh {20 510 90 20} labelsize 12 align 16
+          }
+          Fl_Button m_pbtClearSim {
+            label {C&lear Sim.}
+            user_data this
+            xywh {60 535 70 20} labelsize 12
+          }
+        }
+        Fl_Group {} {
+          label Camera
+          xywh {10 620 80 80} box ENGRAVED_BOX labeltype NO_LABEL
+        } {
+          Fl_Box {} {
+            label Camera
+            xywh {15 620 70 15} labelsize 12 align 16
+          }
+          Fl_Button m_pbtSetCamKeyFrame {
+            label {&Set}
+            user_data this
+            xywh {15 635 70 20} labelsize 12
+          }
+          Fl_Button m_pbtRemoveCamKeyFrame {
+            label {&Remove}
+            user_data this
+            xywh {15 655 70 20} labelsize 12 deactivate
+          }
+          Fl_Button m_pbtRemoveAllCamKeyFrames {
+            label {R&emove All}
+            user_data this
+            xywh {15 675 70 20} labelsize 12
+          }
+        }
+      }
+      Fl_Box {} {
+        label {Model Controls}
+        xywh {5 30 145 25} color 7 labelfont 1 labelsize 18 labelcolor 7
+      }
+    }
+    Fl_Window m_pwndModelerWnd {
+      label Model
+      xywh {481 95 340 296} when 0 hide resizable
+    } {
+      Fl_Box m_pwndModelerView {
+        label ModelerView
+        xywh {0 0 340 295} resizable
+        code0 {\#include "modelerview.h"}
+        class ModelerView
+      }
+    }
+  }
+} 

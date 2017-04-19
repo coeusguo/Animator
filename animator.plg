@@ -1,0 +1,86 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: modeler - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\honghui\LOCALS~1\Temp\RSP77.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /I "local/include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "SAMPLE_SOLUTION" /FR"Debug/" /Fp"Debug/Animator.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\honghui\Desktop\test\curve.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\curveevaluator.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\linearcurveevaluator.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\camera.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\modelerapp.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\modelerdraw.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\modelerui.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\modeleruiwindows.cxx"
+"C:\Documents and Settings\honghui\Desktop\test\modelerview.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\robotarm.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\bitmap.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\particle.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\particleSystem.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\point.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\pointObj.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\graphwidget.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\indicatorwindow.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\rect.cpp"
+"C:\Documents and Settings\honghui\Desktop\test\rulerwindow.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\honghui\LOCALS~1\Temp\RSP77.tmp" 
+Creating temporary file "C:\DOCUME~1\honghui\LOCALS~1\Temp\RSP78.tmp" with contents
+[
+opengl32.lib glu32.lib wsock32.lib local/lib/fltk.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Animator.pdb" /debug /machine:I386 /nodefaultlib:"libcmt" /nodefaultlib:"libcmtb" /nodefaultlib:"msvcrt" /out:"Debug/Animator.exe" /pdbtype:sept 
+".\Debug\curve.obj"
+".\Debug\curveevaluator.obj"
+".\Debug\linearcurveevaluator.obj"
+".\Debug\camera.obj"
+".\Debug\modelerapp.obj"
+".\Debug\modelerdraw.obj"
+".\Debug\modelerui.obj"
+".\Debug\modeleruiwindows.obj"
+".\Debug\modelerview.obj"
+".\Debug\robotarm.obj"
+".\Debug\bitmap.obj"
+".\Debug\particle.obj"
+".\Debug\particleSystem.obj"
+".\Debug\point.obj"
+".\Debug\pointObj.obj"
+".\Debug\graphwidget.obj"
+".\Debug\indicatorwindow.obj"
+".\Debug\rect.obj"
+".\Debug\rulerwindow.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\honghui\LOCALS~1\Temp\RSP78.tmp"
+<h3>Output Window</h3>
+Compiling...
+curve.cpp
+curveevaluator.cpp
+linearcurveevaluator.cpp
+camera.cpp
+modelerapp.cpp
+modelerdraw.cpp
+modelerui.cpp
+modeleruiwindows.cxx
+modelerview.cpp
+robotarm.cpp
+bitmap.cpp
+particle.cpp
+particleSystem.cpp
+point.cpp
+pointObj.cpp
+graphwidget.cpp
+indicatorwindow.cpp
+rect.cpp
+rulerwindow.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+Animator.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
