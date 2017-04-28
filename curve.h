@@ -8,10 +8,10 @@
 #include <string>
 
 #include "Point.h"
-
+#define EBSILON  0.00001
 class CurveEvaluator;
 
-//using namespace std;
+using namespace std;
 
 class Curve
 {

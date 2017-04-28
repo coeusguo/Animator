@@ -25,6 +25,9 @@ public:
 		return sqrtf(xd * xd + yd * yd);
 	}
 
+	float getX() { return x; }
+	float getY() { return y; }
+
 	float x;
 	float y;
 };

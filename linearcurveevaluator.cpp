@@ -8,7 +8,7 @@ void LinearCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 {
 	int iCtrlPtCount = ptvCtrlPts.size();
 
-	ptvEvaluatedCurvePts.assign(ptvCtrlPts.begin(), ptvCtrlPts.end());
+	ptvEvaluatedCurvePts.assign(ptvCtrlPts.begin(), ptvCtrlPts.end());//copy
 
 	float x = 0.0;
 	float y1;
@@ -35,7 +35,7 @@ void LinearCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 
 	ptvEvaluatedCurvePts.push_back(Point(x, y1));
 
-	/// set the endpoint based on the wrap flag.
+	// set the endpoint based on the wrap flag.
 	float y2;
     x = fAniLength;
     if (bWrap)
