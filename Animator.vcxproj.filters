@@ -117,9 +117,6 @@
     <ClCompile Include="beziercurveevaluator.cpp">
       <Filter>Source Files\Curves</Filter>
     </ClCompile>
-    <ClCompile Include="bsplinecurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
     <ClCompile Include="c2interpolatingcurveevaluator.cpp">
       <Filter>Source Files\Curves</Filter>
     </ClCompile>
@@ -201,9 +198,6 @@
       <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="beziercurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="bsplinecurveevaluator.h">
       <Filter>Header Files\Curves.</Filter>
     </ClInclude>
     <ClInclude Include="c2interpolatingcurveevaluator.h">

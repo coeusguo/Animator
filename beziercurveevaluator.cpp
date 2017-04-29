@@ -47,7 +47,6 @@ void BezierCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 		for (int i = ptvEvaluatedCurvePts.size() - 1; i >= 0; i--) {
 			if (abs(ptvEvaluatedCurvePts[i].x - fAniLength) < EBSILON ) {
 				for (int k = i + 1; k < ptvEvaluatedCurvePts.size(); k++) {
-					//cout << "hello" << endl;
 					ptvEvaluatedCurvePts[k].x -= fAniLength;
 				}
 				ptvEvaluatedCurvePts.push_back(Point(0, ptvEvaluatedCurvePts[i].y));

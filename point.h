@@ -25,6 +25,16 @@ public:
 		return sqrtf(xd * xd + yd * yd);
 	}
 
+	Point operator-(Point b) {
+		return Point(x - b.x, y - b.y);
+	}
+	Point operator/(float d) {
+		return Point(x / d, y / d);
+	}
+	Point operator+(Point b) {
+		return Point(x + b.x, y + b.y);
+	}
+
 	float getX() { return x; }
 	float getY() { return y; }
 

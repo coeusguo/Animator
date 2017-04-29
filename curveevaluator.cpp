@@ -16,15 +16,15 @@ void CurveEvaluator::subdivision(vector<Point>& points4,float length) const{
 	//the curve is flat enough
 	if ((v0.distance(v1) + v1.distance(v2) + v2.distance(v3)) / v0.distance(v3) < 1 + 0.001) {
 		//cout << "!!" << endl;
-		
 		if (points4[3].x > length + EBSILON) {
 			//cout << "??" << endl;
 			for (int i = 2; i >= 0; i--) {
 				if (points4[i].x + EBSILON< length) {
 					//linear interpolation
-					cout << "linear interpolation" << endl;
-					float y = ((length - points4[i].x) / (points4[i + 1].x - points4[i].x)) * (points4[i + 1].y - points4[i].y) + points4[i].y;
+					//cout << "linear interpolation" << endl;
+					float y = ((length - points4[i].x) / (points4[i + 1].x - points4[i].x + EBSILON)) * (points4[i + 1].y - points4[i].y) + points4[i].y;
 					points4.insert(points4.begin() + i + 1, Point(length, y));
+					//cout << "length:" << length << endl;
 					break;
 				}
 			}
@@ -58,10 +58,4 @@ void CurveEvaluator::subdivision(vector<Point>& points4,float length) const{
 	points4.assign(point4dLeft.begin(), point4dLeft.end());
 	for (int i = 1; i < point4dRight.size(); i++)
 		points4.push_back(point4dRight[i]);
-	/*
-	cout << "points:" << endl;
-	for (Point p:points4) {
-		cout << p.x << "," << p.y << endl;
-	}*/
-	//cout << endl;
 }
