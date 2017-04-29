@@ -12,7 +12,6 @@ void BezierCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 	result.assign(ptvCtrlPts.begin(), ptvCtrlPts.end());//copy
 
 	if (bWrap) {//wrap
-		//cout << "wrap" << endl;
 		Point phantomPoint(ptvCtrlPts[0].x + fAniLength, ptvCtrlPts[0].y);
 		result.push_back(phantomPoint);
 	}
@@ -21,11 +20,10 @@ void BezierCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 
 	int i = 0;
 	if (result.size() > 3) {
-		//cout << "result > 3" << endl;
 		for (i = 0; i + 3 < result.size(); i += 3) {//C0 continus
 			vector<Point> points4;
 			points4.assign(result.begin() + i, result.begin() + i + 4);
-			subdivision(points4,fAniLength);
+			subdivision(points4,fAniLength,false);
 			for (int k = 1; k < points4.size(); k++)
 				ptvEvaluatedCurvePts.push_back(points4[k]);
 		}
@@ -33,7 +31,6 @@ void BezierCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 	
 
 	if (i < result.size() - 1) {//collect the rest less than 4
-		//cout << "?" << endl;
 		for (int k = i + 1; k < result.size(); k++) {
 			if ((result[k].x > fAniLength + EBSILON) && (result[k - 1].x <= fAniLength + EBSILON)) {
 				float y = ((fAniLength - result[k - 1].x) / (result[k].x - result[k - 1].x)) * (result[k].y - result[k - 1].y) + result[k - 1].y;

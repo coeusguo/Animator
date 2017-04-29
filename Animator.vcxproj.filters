@@ -206,6 +206,9 @@
     <ClInclude Include="catnullromcurveevaluator.h">
       <Filter>Header Files\Curves.</Filter>
     </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>Header Files\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cleanskel.pl">

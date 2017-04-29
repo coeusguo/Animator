@@ -7,7 +7,7 @@ CurveEvaluator::~CurveEvaluator(void)
 {
 }
 
-void CurveEvaluator::subdivision(vector<Point>& points4,float length) const{
+void CurveEvaluator::subdivision(vector<Point>& points4,float length,bool doublePhantom) const{
 	Point v0 = points4[0];
 	Point v1 = points4[1];
 	Point v2 = points4[2];
@@ -15,16 +15,33 @@ void CurveEvaluator::subdivision(vector<Point>& points4,float length) const{
 
 	//the curve is flat enough
 	if ((v0.distance(v1) + v1.distance(v2) + v2.distance(v3)) / v0.distance(v3) < 1 + 0.001) {
-		//cout << "!!" << endl;
 		if (points4[3].x > length + EBSILON) {
-			//cout << "??" << endl;
 			for (int i = 2; i >= 0; i--) {
 				if (points4[i].x + EBSILON< length) {
 					//linear interpolation
-					//cout << "linear interpolation" << endl;
 					float y = ((length - points4[i].x) / (points4[i + 1].x - points4[i].x + EBSILON)) * (points4[i + 1].y - points4[i].y) + points4[i].y;
-					points4.insert(points4.begin() + i + 1, Point(length, y));
-					//cout << "length:" << length << endl;
+					if (doublePhantom) {//delete the points that smaller than length
+						while (points4.size() != i + 1) 
+							points4.pop_back();
+						points4.push_back(Point(length, y));
+					}
+					else {
+						points4.insert(points4.begin() + i + 1, Point(length, y));
+					}
+					break;
+				}
+			}
+		}
+		if (points4[0].x < EBSILON) {
+			for (int i = 1; i < 4; i++) {
+				if (points4[i].x > EBSILON) {//delete the points that 
+					//linear interpolation
+					float y = (-points4[i - 1].x / (points4[i].x - points4[i - 1].x + EBSILON)) * (points4[i].y - points4[i - 1].y) + points4[i - 1].y;
+					vector<Point> cpy = points4;//copy the points
+					points4.clear();
+					points4.push_back(Point(0, y));
+					for (int k = i; k < 4; k++) 
+						points4.push_back(cpy[k]);
 					break;
 				}
 			}
@@ -51,8 +68,8 @@ void CurveEvaluator::subdivision(vector<Point>& points4,float length) const{
 	point4dRight.push_back(v2p);
 	point4dRight.push_back(v3);
 
-	subdivision(point4dLeft,length);
-	subdivision(point4dRight,length);
+	subdivision(point4dLeft,length,doublePhantom);
+	subdivision(point4dRight,length,doublePhantom);
 
 	points4.clear();
 	points4.assign(point4dLeft.begin(), point4dLeft.end());

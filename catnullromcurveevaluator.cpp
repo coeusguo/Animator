@@ -57,16 +57,13 @@ void CatnullRomEvaluator::evaluateCurve(
 		points.push_back(v2);
 		points.push_back(result[i + 1]);
 		//subdivision
-		subdivision(points, fAniLength);
+		subdivision(points, fAniLength,false);
 		for (int k = 1; k < points.size(); k++)
 			ptvEvaluatedCurvePts.push_back(points[k]);
-		//for (Point p : ptvEvaluatedCurvePts)
-			//cout << "x:" << p.x << endl;
 	}
 
 	if (bWrap) {
 		for (int i = ptvEvaluatedCurvePts.size() - 1; i >= 0; i--) {
-			//cout << abs(ptvEvaluatedCurvePts[i].x - fAniLength) << endl;
 			if (ptvEvaluatedCurvePts[i].x == fAniLength) {
 				for (int k = i + 1; k < ptvEvaluatedCurvePts.size(); k++) {
 					ptvEvaluatedCurvePts[k].x -= fAniLength;

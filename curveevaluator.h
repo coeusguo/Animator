@@ -18,7 +18,7 @@ public:
 	static float s_fFlatnessEpsilon;
 	static int s_iSegCount;
 
-	void subdivision(std::vector<Point>&point,float length)const;
+	void subdivision(std::vector<Point>&point,float length,bool doublePhanrom)const;
 };
 
 

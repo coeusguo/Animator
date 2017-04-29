@@ -273,6 +273,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="MarchingCube.h" />
     <ClInclude Include="mat.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="Metaball.h" />
     <ClInclude Include="modelerdraw.h" />
     <ClInclude Include="modelerglobals.h" />
