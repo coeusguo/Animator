@@ -281,7 +281,6 @@
     <ClInclude Include="modeleruiwindows.h" />
     <ClInclude Include="modelerview.h" />
     <ClInclude Include="bitmap.h" />
-    <ClInclude Include="particle.h" />
     <ClInclude Include="particleSystem.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="pointObj.h" />

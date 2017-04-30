@@ -307,7 +307,10 @@ void MyModel::draw()
 
 	glPopMatrix();
 	
-	
+	glPushMatrix();
+	glTranslated(1.0, 1.0, 1.0);
+	drawSphere(0.5);
+	glPopMatrix();
 	
 
 }

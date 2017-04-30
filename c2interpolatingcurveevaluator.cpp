@@ -69,8 +69,8 @@ void C2InterPolatingCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvC
 		points.push_back(result[i + 1]);
 		//subdivision
 		subdivision(points, fAniLength, true);
-		for (int k = 0; k < points.size() - 1; k++) 
-			if(points[k].x < result[i + 1].x)
+		for (int k = 0; k < points.size() - 1; k++)
+			if (points[k].x < result[i + 1].x && points[k].x >= result[i].x)
 				ptvEvaluatedCurvePts.push_back(points[k]);
 		
 		if (i == size - 2) {//the last group

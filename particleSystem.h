@@ -19,6 +19,13 @@
 #include "vec.h"
 
 
+class Particle {
+public:
+	Vec3f position;
+	Vec3f velocity;
+	Vec3f force;
+	Vec3f mass;
+};
 
 class ParticleSystem {
 
@@ -84,7 +91,7 @@ protected:
 										// These 2 variables are used by the UI for
 										// updating the grey indicator 
 	float bake_end_time;				// time at which baking ended
-
+	
 	/** General state variables **/
 	bool simulate;						// flag for simulation mode
 	bool dirty;							// flag for updating ui (don't worry about this)
