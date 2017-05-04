@@ -49,7 +49,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
 
 ModelerUIWindows::ModelerUIWindows() {
   Fl_Window* w;
-  { Fl_Window* o = m_pwndMainWnd = new Fl_Window(589, 705, "CS 341Animator (SP02)");
+  { Fl_Window* o = m_pwndMainWnd = new Fl_Window(589, 705, "COMP 4411 Animator (SP02)");
     w = o;
     o->color(185);
     o->labeltype(FL_NORMAL_LABEL);
@@ -84,6 +84,9 @@ ModelerUIWindows::ModelerUIWindows() {
         o->end();
         Fl_Group::current()->resizable(o);
       }
+
+	  //interface will be added here!!!!!!
+
       { Fl_Group* o = m_pgrpCurveGroup = new Fl_Group(160, 55, 425, 435, "Curves");
         o->labelsize(12);
         { Fl_Group* o = new Fl_Group(160, 55, 420, 410);

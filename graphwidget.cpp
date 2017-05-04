@@ -23,7 +23,6 @@
 #include <fstream>
 
 #include "GraphWidget.h"
-
 #include "LinearCurveEvaluator.h"
 #include "beziercurveevaluator.h"
 #include "catnullromcurveevaluator.h"
