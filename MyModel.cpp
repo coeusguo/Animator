@@ -21,6 +21,12 @@ private:
 	vector<Metaball> metaballs;
 	InverseKinematics2* rightArm;
 	InverseKinematics2* rightLeg;
+	Vec3f* heightFieldPoints;
+	Vec3f* heightFieldNormals;//normals of the vertices
+	unsigned char* vertexColor;
+	int heightFieldWidth;//number of vertices per row
+	int heightFieldHeight;//number of rows
+
 	int angle;
 	bool isAnimationOn;
 	int delta = 5;
@@ -34,6 +40,7 @@ private:
 	Vec3f * calculateNewDir(Vec3f newDir, Vec3f lastDir);
 	void recursionTree3D(Vec3f dir, Vec3f nextdir, Vec3f currentLocationint, float length);
 	void changeAnimationAngle();
+	void loadHeightField();
 public:
 	MyModel(int x, int y, int w, int h, char *label)
 		: ModelerView(x, y, w, h, label) {
@@ -46,6 +53,14 @@ public:
 		angle = 0;
 		isAnimationOn = false;
 		isTextureLoaded = false;
+		loadHeightField();
+	}
+	~MyModel() {
+		delete rightArm;
+		delete rightLeg;
+		delete[] heightFieldNormals;
+		delete[] heightFieldPoints;
+		delete[] vertexColor;
 	}
 	float* getRotateAngles(Vec3f target);//input an target vector,the funtion will return 2 float value,first is rotate from z coord about x,and second value is rotate about y
 
@@ -66,6 +81,7 @@ public:
 	void demo();
 	void initTexture();
 	void drawTexture();
+	void drawHeightField();
 };
 
 // We need to make a creator function, mostly because of
@@ -324,7 +340,8 @@ void MyModel::draw()
 	drawSphere(0.5);
 	glPopMatrix();
 	
-
+	if(VAL(HEIGHTFIELD))
+		drawHeightField();
 }
 
 int main()
@@ -364,6 +381,7 @@ int main()
 	controls[METABALLY] = ModelerControl("Metaball Y", -5, 5, 0.1f, 0);
 	controls[METABALLZ] = ModelerControl("Metaball Z", -5, 5, 0.1f, 0);
 	controls[FRAMEALL] = ModelerControl("Frame All", 0, 1, 1, 0);
+	controls[HEIGHTFIELD] = ModelerControl("Height Field", 0, 1, 1, 0);
 	
 	//controls[LEGCONSTRAINT1] = ModelerControl("Constraint angle1", 45, 135, 1, 135);
 	//controls[LEGCONSTRAINT2] = ModelerControl("Constraint angle", 30, 180, 1, 30);
@@ -1014,4 +1032,124 @@ void MyModel::drawTexture() {
 	*/
 	glDisable(GL_TEXTURE_2D);
 	
+}
+
+void MyModel::loadHeightField() {
+	unsigned char* heightFieldColor;
+	unsigned char* heightFieldValue;
+	unsigned char* greyScaleMap;
+
+	unsigned char*	data;
+	int				width, height;
+
+	char* fname = "./hf_854_.bmp";
+	if ((data = readBMP(fname, width, height)) == NULL)
+	{
+		fl_alert("Can't load bitmap file");
+		return;
+	}
+	heightFieldColor = data;
+
+	fname = "./hf_854_grey_.bmp";
+	if ((data = readBMP(fname, width, height)) == NULL)
+	{
+		fl_alert("Can't load bitmap file");
+		return;
+	}
+	heightFieldValue = data;
+
+	heightFieldWidth = width / 3;
+	heightFieldHeight = height / 3;
+	heightFieldPoints = new Vec3f[heightFieldWidth * heightFieldHeight];
+	vertexColor = new unsigned char[heightFieldWidth * heightFieldHeight * 3];
+	heightFieldNormals = new Vec3f[heightFieldWidth * heightFieldHeight];
+	greyScaleMap = new unsigned char[width * height];
+
+	for (int i = 0; i < width * height; i++)
+		greyScaleMap[i] = heightFieldValue[i * 3] * 0.299 + heightFieldValue[i * 3 + 1] * 0.587 + heightFieldValue[i * 3 + 2] * 0.114;
+
+	int index = 0;
+	int colorIndex = 0;
+	for (int Z = 0; Z < height - 2; Z = Z + 3) {
+		for (int X = 0; X < width - 2; X = X + 3) {
+
+			vertexColor[colorIndex] = heightFieldColor[(Z * width + X) * 3];
+			vertexColor[colorIndex + 1] = heightFieldColor[(Z * width + X) * 3 + 1];
+			vertexColor[colorIndex + 2] = heightFieldColor[(Z * width + X) * 3 + 2];
+			colorIndex += 3;
+
+			float x = (float(X) / float(width)) * 5;
+			float z = (float(Z) / float(height)) * 5;
+			float y = (float(greyScaleMap[Z * width + X]) / 255.0f);
+			heightFieldPoints[index] = Vec3f(x, y, z);
+			index++;
+			//mesh->addMaterial(m);
+		}
+	}
+	
+	for (int Y = 0; Y < heightFieldHeight - 1; Y = Y + 1) {
+		for (int X = 0; X < heightFieldWidth - 1; X = X + 1) {
+			int p11 = Y * heightFieldWidth + X;
+			int p12 = Y * heightFieldWidth + X + 1;
+			int p21 = (Y + 1) * heightFieldWidth + X;
+			int p22 = (Y + 1) * heightFieldWidth + X + 1;
+			
+			Vec3f normal1 = (heightFieldPoints[p11] - heightFieldPoints[p12]) ^ (heightFieldPoints[p22] - heightFieldPoints[p12]);
+			normal1.normalize();
+			Vec3f normal2 = (heightFieldPoints[p22] - heightFieldPoints[p21]) ^ (heightFieldPoints[p11] - heightFieldPoints[p21]);
+			normal2.normalize();
+			heightFieldNormals[p11] += (normal1 + normal2);
+			heightFieldNormals[p12] += normal1;
+			heightFieldNormals[p21] += normal2;
+			heightFieldNormals[p22] += (normal1 + normal2);
+		}
+	}
+
+	for (int i = 0; i < heightFieldHeight * heightFieldWidth; i++)
+		heightFieldNormals[i].normalize();
+
+	delete[]heightFieldValue;
+	delete[]greyScaleMap;
+	delete[]heightFieldColor;
+}
+
+void MyModel::drawHeightField() {
+	cout << "draw height field" << endl;
+
+	for (int Y = 0; Y < heightFieldHeight - 1; Y = Y + 1) {
+		for (int X = 0; X < heightFieldWidth - 1; X = X + 1) {
+			int p11 = Y * heightFieldWidth + X;
+			int p12 = Y * heightFieldWidth + X + 1;
+			int p21 = (Y + 1) * heightFieldWidth + X;
+			int p22 = (Y + 1) * heightFieldWidth + X + 1;
+			//linear interpolate the color
+			Vec3f color1((vertexColor[p11 * 3] + vertexColor[p12 * 3] + vertexColor[p22 * 3]) / 3.0f, (vertexColor[p11 * 3 + 1] + vertexColor[p12 * 3 + 1] + vertexColor[p22 * 3 + 1]) / 3.0f, (vertexColor[p11 * 3 + 2] + vertexColor[p12 * 3 + 2] + vertexColor[p22 * 3 + 2]) / 3.0f);
+			Vec3f color2((vertexColor[p11 * 3] + vertexColor[p21 * 3] + vertexColor[p22 * 3]) / 3.0f, (vertexColor[p11 * 3 + 1] + vertexColor[p21 * 3 + 1] + vertexColor[p22 * 3 + 1]) / 3.0f, (vertexColor[p11 * 3 + 2] + vertexColor[p21 * 3 + 2] + vertexColor[p22 * 3 + 2]) / 3.0f);
+			glBegin(GL_TRIANGLES);
+
+			setDiffuseColor(color1[0] / 255.0f, color1[1] / 255.0f, color1[2] / 255.0f);
+
+			glNormal3fv(heightFieldNormals[p11].getPointer());
+			glVertex3fv(heightFieldPoints[p11].getPointer());
+
+			glNormal3fv(heightFieldNormals[p12].getPointer());
+			glVertex3fv(heightFieldPoints[p12].getPointer());
+
+			glNormal3fv(heightFieldNormals[p22].getPointer());
+			glVertex3fv(heightFieldPoints[p22].getPointer());
+
+			setDiffuseColor(color2[0] / 255.0f, color2[1] / 255.0f, color2[2] / 255.0f);
+
+			glNormal3fv(heightFieldNormals[p11].getPointer());
+			glVertex3fv(heightFieldPoints[p11].getPointer());
+
+			glNormal3fv(heightFieldNormals[p21].getPointer());
+			glVertex3fv(heightFieldPoints[p21].getPointer());
+
+			glNormal3fv(heightFieldNormals[p22].getPointer());
+			glVertex3fv(heightFieldPoints[p22].getPointer());
+
+			glEnd();
+		}
+	}
 }
