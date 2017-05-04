@@ -25,6 +25,7 @@
 #include "GraphWidget.h"
 #include "LinearCurveEvaluator.h"
 #include "beziercurveevaluator.h"
+#include "bsplinecurveevaluator.h"
 #include "catnullromcurveevaluator.h"
 #include "c2interpolatingcurveevaluator.h"
 #include "bsplinecurveevaluator.h"
