@@ -15,8 +15,8 @@ void BSplineCurveEvaluator::evaluateCurve(const std::vector<Point>& ptvCtrlPts,
 		result.push_back(Point((ptvCtrlPts.end() - 2)->x - fAniLength, (ptvCtrlPts.end() - 2)->y));
 		result.push_back(Point((ptvCtrlPts.end() - 1)->x - fAniLength, (ptvCtrlPts.end() - 1)->y));
 		result.insert(result.end(), ptvCtrlPts.begin(), ptvCtrlPts.end());
-		result.push_back(Point((ptvCtrlPts.end())->x - fAniLength, (ptvCtrlPts.end())->y));
-		result.push_back(Point((ptvCtrlPts.end() + 1)->x - fAniLength, (ptvCtrlPts.end() + 1)->y));
+		result.push_back(Point((ptvCtrlPts.begin())->x + fAniLength, (ptvCtrlPts.begin())->y));
+		result.push_back(Point((ptvCtrlPts.begin() + 1)->x + fAniLength, (ptvCtrlPts.begin() + 1)->y));
 	}
 	else {
 		ptvEvaluatedCurvePts.push_back(Point(0, ptvCtrlPts.front().y));
