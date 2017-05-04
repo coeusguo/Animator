@@ -127,11 +127,14 @@
       <Filter>Source Files\Curves</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="subsivisioncurveevaluator.cpp">
       <Filter>Source Files\Curves</Filter>
     </ClCompile>
 =======
 >>>>>>> 4d7c88b3f264373f708e45c301074bf4573dda2e
+=======
+>>>>>>> d7f6e66e7f109153d176bbe50cb706aa5a0f7c7b
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="curve.h">
@@ -219,11 +222,14 @@
       <Filter>Header Files\Curves.</Filter>
     </ClInclude>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="subsivisioncurveevaluator.h">
       <Filter>Header Files\Curves.</Filter>
     </ClInclude>
 =======
 >>>>>>> 4d7c88b3f264373f708e45c301074bf4573dda2e
+=======
+>>>>>>> d7f6e66e7f109153d176bbe50cb706aa5a0f7c7b
   </ItemGroup>
   <ItemGroup>
     <None Include="cleanskel.pl">
