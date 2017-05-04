@@ -543,8 +543,10 @@ void ModelerUI::cb_loop(Fl_Light_Button* o, void* v)
 
 inline void ModelerUI::cb_simulate_i(Fl_Light_Button* o, void*) 
 {
+
 }
 
+//this function is called by clicking the light buttom "simulate"
 void ModelerUI::cb_simulate(Fl_Light_Button* o, void* v) 
 {
 	((ModelerUI*)(o->user_data()))->cb_simulate_i(o,v);
@@ -791,6 +793,7 @@ bool ModelerUI::simulate() const
 
 void ModelerUI::simulate(bool bSimulate)
 {
+	//cout << "simulate" << endl;
 	if (bSimulate) {
 		m_pbtSimulate->set();
 	}

@@ -152,9 +152,6 @@
     <ClInclude Include="bitmap.h">
       <Filter>Header Files\Particles.</Filter>
     </ClInclude>
-    <ClInclude Include="particle.h">
-      <Filter>Header Files\Particles.</Filter>
-    </ClInclude>
     <ClInclude Include="particleSystem.h">
       <Filter>Header Files\Particles.</Filter>
     </ClInclude>
@@ -168,9 +165,6 @@
       <Filter>Header Files\UI.</Filter>
     </ClInclude>
     <ClInclude Include="indicatorwindow.h">
-      <Filter>Header Files\UI.</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerapp.h">
       <Filter>Header Files\UI.</Filter>
     </ClInclude>
     <ClInclude Include="rect.h">
@@ -208,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="matrix.h">
       <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="modelerapp.h">
+      <Filter>Header Files\Model.</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

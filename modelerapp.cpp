@@ -180,6 +180,7 @@ void ModelerApplication::ValueChangedCallback()
 
 		// check to see if we're simulating still
 		simulating = ps->isSimulate();
+		//maybe user turn off or turn on the simulation button during the animation
 		if (simulating != m_ui->simulate()) {
 			// if the psystem is dirty,
 			// we need to sync to it

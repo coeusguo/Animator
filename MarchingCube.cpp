@@ -49,17 +49,6 @@ grid::grid(int gridSize) {
 			}
 		}
 	}
-	/*
-	cout << cubes[0].vertices[0]->position[1] << endl;
-	cout << cubes[0].vertices[1]->position[1] << endl;
-	cout << cubes[0].vertices[2]->position[1] << endl;
-	cout << cubes[0].vertices[3]->position[1] << endl;
-	cout << cubes[0].vertices[4]->position[1] << endl;
-	cout << cubes[0].vertices[5]->position[1] << endl;
-	cout << cubes[0].vertices[6]->position[1] << endl;
-	cout << cubes[0].vertices[7]->position[1] << endl;
-	*/
-	
 }
 
 grid::~grid() {
@@ -99,14 +88,10 @@ void grid::drawSurface(float isolevel) {
 			if (edges & bit) {
 				vertex* p1 = cubes[i].vertices[endPoint[n * 2]];
 				vertex* p2 = cubes[i].vertices[endPoint[n * 2 + 1]];
-				//cout << endPoint[n * 2]<<","<<endPoint[n * 2 + 1] << endl;;
-				//cout << p1->position[0] << "," << p2->position[0] << endl;
+
 				float factor = (isolevel - p1->value) / (p2->value - p1->value);
-				//cout << p2->value - p1->value << endl;
+
 				onEdge[n].position[0] = p1->position[0] + factor * (p2->position[0] - p1->position[0]);
-				//cout << p2->position[0] - p1->position[0] << endl;
-				//cout << onEdge[n].position[0] << endl;
-				//cout << factor << endl;
 				onEdge[n].position[1] = p1->position[1] + factor * (p2->position[1] - p1->position[1]);
 				onEdge[n].position[2] = p1->position[2] + factor * (p2->position[2] - p1->position[2]);
 
@@ -120,7 +105,7 @@ void grid::drawSurface(float isolevel) {
 			//cout << "hello" << endl;
 			glNormal3fv(onEdge[triTable[cubeindex][j * 3]].normal.getPointer());
 			glVertex3fv(onEdge[triTable[cubeindex][j * 3]].position.getPointer());
-			//cout << onEdge[triTable[cubeindex][j * 3]].position.getPointer()[0] << endl;;
+
 			glNormal3fv(onEdge[triTable[cubeindex][j * 3 + 1]].normal.getPointer());
 			glVertex3fv(onEdge[triTable[cubeindex][j * 3 + 1]].position.getPointer());
 

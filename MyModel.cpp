@@ -84,6 +84,7 @@ void MyModel::draw()
 	// This call takes care of a lot of the nasty projection 
 	// matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
+	//cout << "t:" << t << endl;
 	Vec4f result1(0, 0, 0, 0);
 	Vec4f result2(0, 0, 0, 0);
 	ModelerView::draw();
@@ -144,6 +145,8 @@ void MyModel::draw()
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_RED);
 	
+
+
 	glPushMatrix();
 	glTranslated(-5, 0, -5);
 	drawBox(10, 0.01f, 10);
@@ -175,6 +178,15 @@ void MyModel::draw()
 
 	//head
 	drawHead();
+
+	// If particle system exists, draw it
+	ParticleSystem *ps = ModelerApplication::Instance()->GetParticleSystem();
+	if (ps != NULL) {
+		setDiffuseColor(COLOR_RED);
+		ps->drawParticles(t);
+		setDiffuseColor(COLOR_GREEN);
+	}
+
 
 	//right arm and ik part
 	glPushMatrix();
@@ -355,7 +367,8 @@ int main()
 	
 	//controls[LEGCONSTRAINT1] = ModelerControl("Constraint angle1", 45, 135, 1, 135);
 	//controls[LEGCONSTRAINT2] = ModelerControl("Constraint angle", 30, 180, 1, 30);
-
+	ParticleSystem* ps = new ParticleSystem(Vec3f(-1.2, 0, -0.2), Vec3f(1.2, 0, -0.2), 2.8, 4.0, 28, 40, 30);
+	ModelerApplication::Instance()->SetParticleSystem(ps);
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
 }
@@ -723,11 +736,7 @@ void MyModel::initRecurtionTree() {
 	glRotated(-90, 1, 0, 0);
 	drawCylinder(trunkHeight, 0.1, 0.1);
 	glPopMatrix();
-	//cout << newDir[0][0] << "," << newDir[0][1] << "," << newDir[0][2] << endl;
-	//cout << newDir[1][0] << "," << newDir[1][1] << "," << newDir[1][2] << endl;
-	//cout << newDir[2][0] << "," << newDir[2][1] << "," << newDir[2][2] << endl;
-	//cout << newDir[3][0] << "," << newDir[3][1] << "," << newDir[3][2] << endl;
-	//cout << inidirVec[0] << "," << inidirVec[1] << "," << inidirVec[2] << endl;
+
 	recursionTree3D(inidirVec,newDir[0], currentLocation, trunkHeight);
 	recursionTree3D(inidirVec,newDir[1], currentLocation, trunkHeight);
 	recursionTree3D(inidirVec,newDir[2], currentLocation, trunkHeight);
