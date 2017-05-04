@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="beziercurveevaluator.cpp" />
+    <ClCompile Include="bsplinecurveevaluator.cpp" />
     <ClCompile Include="c2interpolatingcurveevaluator.cpp" />
     <ClCompile Include="catnullromcurveevaluator.cpp" />
     <ClCompile Include="curve.cpp">
@@ -264,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="beziercurveevaluator.h" />
+    <ClInclude Include="bsplinecurveevaluator.h" />
     <ClInclude Include="c2interpolatingcurveevaluator.h" />
     <ClInclude Include="catnullromcurveevaluator.h" />
     <ClInclude Include="curve.h" />

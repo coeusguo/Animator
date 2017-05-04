@@ -123,6 +123,9 @@
     <ClCompile Include="catnullromcurveevaluator.cpp">
       <Filter>Source Files\Curves</Filter>
     </ClCompile>
+    <ClCompile Include="bsplinecurveevaluator.cpp">
+      <Filter>Source Files\Curves</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="curve.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="modelerapp.h">
       <Filter>Header Files\Model.</Filter>
+    </ClInclude>
+    <ClInclude Include="bsplinecurveevaluator.h">
+      <Filter>Header Files\Curves.</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
