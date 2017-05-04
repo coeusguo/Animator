@@ -14,7 +14,7 @@ void CurveEvaluator::subdivision(vector<Point>& points4,float length,bool double
 	Point v3 = points4[3];
 
 	//the curve is flat enough
-	if ((v0.distance(v1) + v1.distance(v2) + v2.distance(v3)) / v0.distance(v3) < 1 + 0.001) {
+	if ((v0.distance(v1) + v1.distance(v2) + v2.distance(v3)) / v0.distance(v3) < 1 + threshold) {
 		if (points4[3].x > length + EBSILON) {
 			for (int i = 2; i >= 0; i--) {
 				if (points4[i].x + EBSILON< length) {

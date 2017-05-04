@@ -15,13 +15,15 @@
 #include "point.h"
 #include "curve.h"
 #include "curveevaluator.h"
+#include "subsivisioncurveevaluator.h"
 
 #define CURVE_TYPE_LINEAR 0
 #define CURVE_TYPE_BSPLINE 1
 #define CURVE_TYPE_BEZIER 2
 #define CURVE_TYPE_CATMULLROM 3
 #define CURVE_TYPE_C2INTERPOLATING 4
-#define CURVE_TYPE_COUNT 5
+#define CURVE_TYPE_SUBDIVISION 5
+#define CURVE_TYPE_COUNT 6
 
 #define CURVE_COLOR_COUNT 6
 
@@ -110,7 +112,13 @@ public:
 	bool loadScript(const char* szFileName);
 
 	void zoomAll();
-
+	void setThreshold(float value) {
+		for (int i = 0; i < CURVE_TYPE_COUNT; i++)
+			m_ppceCurveEvaluators[i]->setThreshold(value);
+	}
+	void setAvgMask(float value) {
+		((SubdivisionCurveEvaluator*)m_ppceCurveEvaluators[CURVE_TYPE_SUBDIVISION])->setAvgMask(value);
+	}
 	Point windowToGrid( Point p ) ;
 	Point gridToWindow( Point p ) ;
 

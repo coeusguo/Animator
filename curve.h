@@ -8,6 +8,7 @@
 #include <string>
 
 #include "Point.h"
+
 #define EBSILON  0.00001
 class CurveEvaluator;
 

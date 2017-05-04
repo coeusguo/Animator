@@ -74,5 +74,8 @@ public:
   Fl_Button *m_pbtRemoveAllCamKeyFrames;
   Fl_Window *m_pwndModelerWnd;
   ModelerView *m_pwndModelerView;
+  //the widget below are added by a very handsome guy
+  Fl_Slider *m_SubdivideThreshold;
+  Fl_Slider *m_curveAveragingMask;
 };
 #endif

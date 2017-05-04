@@ -138,6 +138,13 @@ private:
 	inline void cb_loop_i(Fl_Light_Button*, void*);
 	static void cb_loop(Fl_Light_Button*, void*);
 	static void cb_timed(void *); // timed callback for animation
+
+	
+	static void cb_threshold(Fl_Slider*, void*);
+	inline void cb_threshold_i(Fl_Slider*, void*);
+
+	static void cb_curveAvgMask(Fl_Slider* o, void* v);
+	inline void cb_curveAvgMask_i(Fl_Slider* o, void* v);
 };
 
 #endif

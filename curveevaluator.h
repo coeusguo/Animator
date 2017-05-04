@@ -10,6 +10,9 @@
 class CurveEvaluator
 {
 public:
+	CurveEvaluator() {
+		threshold = 0.001;
+	}
 	virtual ~CurveEvaluator(void);
 	virtual void evaluateCurve(const std::vector<Point>& control_points, 
 							   std::vector<Point>& evaluated_curve_points, 
@@ -19,6 +22,9 @@ public:
 	static int s_iSegCount;
 
 	void subdivision(std::vector<Point>&point,float length,bool doublePhanrom)const;
+	void setThreshold(float value) { threshold = value; }
+protected:
+	float threshold;
 };
 
 

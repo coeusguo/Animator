@@ -44,6 +44,7 @@ Fl_Menu_Item ModelerUIWindows::menu_m_pchoCurveType[] = {
  {"Bezier", 0,  0, 0, 0, 0, 0, 12, 0},
  {"Catmull-Rom", 0,  0, 0, 0, 0, 0, 12, 0},
  {"C2-Interpolating", 0,  0, 0, 0, 0, 0, 12, 0},
+ { "Subdivision", 0,  0, 0, 0, 0, 0, 12, 0 },
  {0}
 };
 
@@ -87,7 +88,7 @@ ModelerUIWindows::ModelerUIWindows() {
 
 	  //interface will be added here!!!!!!
 
-      { Fl_Group* o = m_pgrpCurveGroup = new Fl_Group(160, 55, 425, 435, "Curves");
+      { Fl_Group* o = m_pgrpCurveGroup = new Fl_Group(160, 55, 425, 500, "Curves");
         o->labelsize(12);
         { Fl_Group* o = new Fl_Group(160, 55, 420, 410);
           { Fl_Box* o = new Fl_Box(160, 55, 40, 20, "Useless Box");
@@ -132,15 +133,39 @@ ModelerUIWindows::ModelerUIWindows() {
             o->labelsize(12);
             o->user_data((void*)(this));
           }
+		
           o->end();
         }
+		{
+			Fl_Slider* o = m_SubdivideThreshold = new Fl_Slider(160, 495, 100, 20, "Threshold");
+			o->type(5);
+			o->labelsize(12);
+			o->minimum(0.001);
+			o->maximum(0.1);
+			o->step(0.001);
+			o->value(0.001);
+			o->user_data((void*)(this));
+			o->align(FL_ALIGN_RIGHT);
+		}
+		{
+			Fl_Slider* o = m_curveAveragingMask = new Fl_Slider(320, 495, 100, 20, "Curve Avg Mask(Left Ratio)");
+			o->type(5);
+			o->labelsize(12);
+			o->minimum(0.1);
+			o->maximum(0.9);
+			o->step(0.1);
+			o->value(0.5);
+			o->user_data((void*)(this));
+			o->align(FL_ALIGN_RIGHT);
+		}
         o->end();
+
       }
       o->end();
     }
-    { Fl_Group* o = new Fl_Group(5, 510, 580, 190, "Animation Controls");
+    { Fl_Group* o = new Fl_Group(5, 510, 580, 340, "Animation Controls");
       o->labeltype(FL_NO_LABEL);
-      { Fl_Group* o = new Fl_Group(95, 550, 490, 150, "Playback");
+      { Fl_Group* o = new Fl_Group(95, 550, 490, 300, "Playback");
         o->labeltype(FL_NO_LABEL);
         { Fl_Group* o = new Fl_Group(155, 550, 430, 55, "Playback Controls");
           o->box(FL_ENGRAVED_BOX);

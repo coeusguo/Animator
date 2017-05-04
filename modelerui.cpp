@@ -541,6 +541,21 @@ void ModelerUI::cb_loop(Fl_Light_Button* o, void* v)
 	((ModelerUI*)(o->user_data()))->cb_loop_i(o,v);
 }
 
+void ModelerUI::cb_threshold(Fl_Slider* o, void* v) {
+	((ModelerUI*)(o->user_data()))->cb_threshold_i(o, v);
+}
+
+void ModelerUI::cb_threshold_i(Fl_Slider* o, void* v) {
+	m_pwndGraphWidget->setThreshold(m_SubdivideThreshold->value());
+}
+
+void ModelerUI::cb_curveAvgMask(Fl_Slider* o, void* v) {
+	((ModelerUI*)(o->user_data()))->cb_curveAvgMask_i(o, v);
+}
+void ModelerUI::cb_curveAvgMask_i(Fl_Slider* o, void* v) {
+	m_pwndGraphWidget->setAvgMask(m_curveAveragingMask->value());
+}
+
 inline void ModelerUI::cb_simulate_i(Fl_Light_Button* o, void*) 
 {
 
@@ -911,6 +926,8 @@ m_bSaveMovie(false)
 	m_pbtLoop->callback((Fl_Callback*)cb_loop);
 	m_pbtSimulate->callback((Fl_Callback*)cb_simulate);
 	m_psldrFPS->callback((Fl_Callback*)cb_fps);
+	m_SubdivideThreshold->callback((Fl_Callback*)cb_threshold);
+	m_curveAveragingMask->callback((Fl_Callback*)cb_curveAvgMask);
 
 	m_pwndMainWnd->callback((Fl_Callback*)cb_hide);
 	m_pwndMainWnd->when(FL_HIDE);
