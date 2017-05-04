@@ -1114,7 +1114,6 @@ void MyModel::loadHeightField() {
 }
 
 void MyModel::drawHeightField() {
-	cout << "draw height field" << endl;
 
 	for (int Y = 0; Y < heightFieldHeight - 1; Y = Y + 1) {
 		for (int X = 0; X < heightFieldWidth - 1; X = X + 1) {
