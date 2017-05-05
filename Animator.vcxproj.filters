@@ -1,245 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{c7686d8a-1f55-4c4d-b763-ffdd9d260c8d}</UniqueIdentifier>
-      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Curves">
-      <UniqueIdentifier>{d5f0fe0a-2ed6-4834-8c2b-1a937c8f0e33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model">
-      <UniqueIdentifier>{c13a68f3-0c0b-4295-8b5a-b0e0f9aac99b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Particles">
-      <UniqueIdentifier>{f59d4eec-bac6-4bf1-9e53-cd77c53818fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\UI">
-      <UniqueIdentifier>{65742b23-666b-4a0d-a9df-ea4b6e431f37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{9faa82ba-ba0c-40fc-b8de-253ba3319d22}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Curves.">
-      <UniqueIdentifier>{79e72725-3ada-40b1-a25a-ed53f7a3d8be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model.">
-      <UniqueIdentifier>{4b2322ff-e362-4c94-99cc-baf9516baa78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Particles.">
-      <UniqueIdentifier>{3cf181b6-e89f-41cc-9480-f68363a106b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UI.">
-      <UniqueIdentifier>{56fa2591-55db-4341-ae78-9763baf3a947}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{133b5350-744c-4417-8892-0df5578ace47}</UniqueIdentifier>
-      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
-    </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{0d6be607-8533-4ea6-b6ec-16a86e67cc2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{ba637b1d-46f9-4ffe-a89c-a0c65e928e64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\math">
-      <UniqueIdentifier>{cc3e4827-0ea3-49a1-8fef-f4d5c813a8fd}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="beziercurveevaluator.cpp" />
+    <ClCompile Include="bsplinecurveevaluator.cpp" />
+    <ClCompile Include="c2interpolatingcurveevaluator.cpp" />
+    <ClCompile Include="catnullromcurveevaluator.cpp" />
+    <ClCompile Include="curve.cpp" />
+    <ClCompile Include="curveevaluator.cpp" />
+    <ClCompile Include="InverseKinematics.cpp" />
+    <ClCompile Include="linearcurveevaluator.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="MarchingCube.cpp" />
+    <ClCompile Include="Metaball.cpp" />
+    <ClCompile Include="modelerapp.cpp" />
+    <ClCompile Include="modelerdraw.cpp" />
+    <ClCompile Include="modelerui.cpp" />
+    <ClCompile Include="modeleruiwindows.cxx" />
+    <ClCompile Include="modelerview.cpp" />
+    <ClCompile Include="bitmap.cpp" />
+    <ClCompile Include="MyModel.cpp" />
+    <ClCompile Include="particle.cpp" />
+    <ClCompile Include="particleSystem.cpp" />
+    <ClCompile Include="point.cpp" />
+    <ClCompile Include="pointObj.cpp" />
+    <ClCompile Include="graphwidget.cpp" />
+    <ClCompile Include="indicatorwindow.cpp" />
+    <ClCompile Include="rect.cpp" />
+    <ClCompile Include="rulerwindow.cpp" />
+    <ClCompile Include="subsivisioncurveevaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="curve.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="curveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="linearcurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="modelerapp.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="modelerdraw.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="modelerui.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="modeleruiwindows.cxx">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="modelerview.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="bitmap.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="particle.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="particleSystem.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="point.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="pointObj.cpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="graphwidget.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="indicatorwindow.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="rect.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="rulerwindow.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="MyModel.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="InverseKinematics.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="MarchingCube.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Metaball.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="beziercurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="c2interpolatingcurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="catnullromcurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-    <ClCompile Include="bsplinecurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClCompile Include="subsivisioncurveevaluator.cpp">
-      <Filter>Source Files\Curves</Filter>
-    </ClCompile>
-=======
->>>>>>> 4d7c88b3f264373f708e45c301074bf4573dda2e
-=======
->>>>>>> d7f6e66e7f109153d176bbe50cb706aa5a0f7c7b
+    <ClInclude Include="beziercurveevaluator.h" />
+    <ClInclude Include="bsplinecurveevaluator.h" />
+    <ClInclude Include="c2interpolatingcurveevaluator.h" />
+    <ClInclude Include="catnullromcurveevaluator.h" />
+    <ClInclude Include="curve.h" />
+    <ClInclude Include="curveevaluator.h" />
+    <ClInclude Include="subsivisioncurveevaluator.h" />
+    <ClInclude Include="InverseKinematics.h" />
+    <ClInclude Include="linearcurveevaluator.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="MarchingCube.h" />
+    <ClInclude Include="mat.h" />
+    <ClInclude Include="matrix.h" />
+    <ClInclude Include="Metaball.h" />
+    <ClInclude Include="modelerdraw.h" />
+    <ClInclude Include="modelerglobals.h" />
+    <ClInclude Include="modelerui.h" />
+    <ClInclude Include="modeleruiwindows.h" />
+    <ClInclude Include="modelerview.h" />
+    <ClInclude Include="bitmap.h" />
+    <ClInclude Include="particleSystem.h" />
+    <ClInclude Include="point.h" />
+    <ClInclude Include="pointObj.h" />
+    <ClInclude Include="graphwidget.h" />
+    <ClInclude Include="indicatorwindow.h" />
+    <ClInclude Include="modelerapp.h" />
+    <ClInclude Include="rect.h" />
+    <ClInclude Include="rulerwindow.h" />
+    <ClInclude Include="vec.h" />
+    <ClInclude Include="subdivisionSurface.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="curve.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="curveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="linearcurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerdraw.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerui.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="modeleruiwindows.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerview.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap.h">
-      <Filter>Header Files\Particles.</Filter>
-    </ClInclude>
-    <ClInclude Include="particleSystem.h">
-      <Filter>Header Files\Particles.</Filter>
-    </ClInclude>
-    <ClInclude Include="point.h">
-      <Filter>Header Files\Particles.</Filter>
-    </ClInclude>
-    <ClInclude Include="pointObj.h">
-      <Filter>Header Files\Particles.</Filter>
-    </ClInclude>
-    <ClInclude Include="graphwidget.h">
-      <Filter>Header Files\UI.</Filter>
-    </ClInclude>
-    <ClInclude Include="indicatorwindow.h">
-      <Filter>Header Files\UI.</Filter>
-    </ClInclude>
-    <ClInclude Include="rect.h">
-      <Filter>Header Files\UI.</Filter>
-    </ClInclude>
-    <ClInclude Include="rulerwindow.h">
-      <Filter>Header Files\UI.</Filter>
-    </ClInclude>
-    <ClInclude Include="InverseKinematics.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="MarchingCube.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Metaball.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerglobals.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="mat.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
-    <ClInclude Include="vec.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
-    <ClInclude Include="beziercurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="c2interpolatingcurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="catnullromcurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-    <ClInclude Include="matrix.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
-    <ClInclude Include="modelerapp.h">
-      <Filter>Header Files\Model.</Filter>
-    </ClInclude>
-    <ClInclude Include="bsplinecurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClInclude Include="subsivisioncurveevaluator.h">
-      <Filter>Header Files\Curves.</Filter>
-    </ClInclude>
-=======
->>>>>>> 4d7c88b3f264373f708e45c301074bf4573dda2e
-=======
->>>>>>> d7f6e66e7f109153d176bbe50cb706aa5a0f7c7b
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cleanskel.pl">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="modeleruiwindows.fl">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="skelrenamer.pl">
-      <Filter>Resource Files</Filter>
-    </None>
+    <None Include="cleanskel.pl" />
+    <None Include="modeleruiwindows.fl" />
+    <None Include="skelrenamer.pl" />
   </ItemGroup>
 </Project>

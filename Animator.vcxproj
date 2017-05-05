@@ -271,6 +271,7 @@
     <ClInclude Include="catnullromcurveevaluator.h" />
     <ClInclude Include="curve.h" />
     <ClInclude Include="curveevaluator.h" />
+    <ClInclude Include="subdivisionSurface.h" />
     <ClInclude Include="subsivisioncurveevaluator.h" />
     <ClInclude Include="InverseKinematics.h" />
     <ClInclude Include="linearcurveevaluator.h" />

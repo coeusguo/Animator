@@ -547,7 +547,7 @@ void ModelerUI::cb_threshold(Fl_Slider* o, void* v) {
 
 void ModelerUI::cb_threshold_i(Fl_Slider* o, void* v) {
 	m_pwndGraphWidget->setThreshold(m_SubdivideThreshold->value());
-	m_pwndGraphWidget->refresh();
+	//m_pwndGraphWidget->refresh();
 }
 //!!!!!!!!!!!!!!!!!!!!!??????????????????????!!!???
 void ModelerUI::cb_curveAvgMask(Fl_Slider* o, void* v) {

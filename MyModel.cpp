@@ -6,6 +6,7 @@
 #include "MarchingCube.h"
 #include "InverseKinematics.h"
 #include "modelerglobals.h"
+#include "subdivisionSurface.h"
 #include "Metaball.h"
 #include "mat.h"
 #include "modelerui.h"
@@ -13,7 +14,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+vector<float> Vertex::averageMask;
 // To make a SampleModel, we inherit off of 
 class MyModel : public ModelerView
 {
@@ -41,6 +42,8 @@ private:
 	void recursionTree3D(Vec3f dir, Vec3f nextdir, Vec3f currentLocationint, float length);
 	void changeAnimationAngle();
 	void loadHeightField();
+
+	Diamond* d;
 public:
 	MyModel(int x, int y, int w, int h, char *label)
 		: ModelerView(x, y, w, h, label) {
@@ -54,6 +57,16 @@ public:
 		isAnimationOn = false;
 		isTextureLoaded = false;
 		loadHeightField();
+
+		Vec3f position[6];
+		position[0] = Vec3f(2, 2, 2);
+		position[1] = Vec3f(1, 1, 1);
+		position[2] = Vec3f(1, 1, -1);
+		position[3] = Vec3f(-1, 1, -1);
+		position[4] = Vec3f(-1, 1, 1);
+		position[5] = Vec3f(2, 0, 2);
+		d = new Diamond(position);
+		d->split(0);
 	}
 	~MyModel() {
 		delete rightArm;
@@ -82,6 +95,7 @@ public:
 	void initTexture();
 	void drawTexture();
 	void drawHeightField();
+	void drawSubDivSurface();
 };
 
 // We need to make a creator function, mostly because of
@@ -342,6 +356,8 @@ void MyModel::draw()
 	
 	if(VAL(HEIGHTFIELD))
 		drawHeightField();
+
+	drawSubDivSurface();
 }
 
 int main()
@@ -1139,4 +1155,9 @@ void MyModel::drawHeightField() {
 			glEnd();
 		}
 	}
+}
+
+void MyModel::drawSubDivSurface() {
+
+	d->draw();
 }
