@@ -18,17 +18,30 @@ private:
 		float betaN = 5 / 4.0f - pow(3 + 2 * cosf(2 * PI / n), 2) / 32.0f;
 		return n * (1 - betaN) / betaN;
 	}
+	Vec3f normal;
 public:
 	static vector<float> averageMask;
 
 	Vertex(Vec3f pos) { position = pos; }
 
 	void updateNeighbour(Vertex* origin, Vertex* newOne){
-		for (Vertex* p : neighbours) 
-			if (p == origin)
-				p = newOne;
+		for (int i = 0; i < neighbours.size(); i++) {
+			if (neighbours[i] == origin) {
+				neighbours.at(i) = newOne;
+				//cout << "new!:" << neighbours[i]->getPosition() << "old:" << origin->getPosition() << endl;
+				return;
+			}
+			if (neighbours[i] == newOne)//has been already changed
+				return;
+		}
 	}
-
+	void addNormal(Vec3f& normal) {
+		this->normal += normal;
+	}
+	Vec3f getNormal() {
+		normal.normalize();
+		return normal;
+	}
 	void addNeightBour(Vertex* neighbour) {
 		neighbours.push_back(neighbour);
 	}
@@ -168,11 +181,15 @@ private:
 		Edge* newEdge = new Edge(subEdge[0]->getAnotherVertex(v), subEdge[1]->getAnotherVertex(v));
 		newEdges.push_back(newEdge);
 		Triface* t = new Triface(subEdge[0], subEdge[1], newEdge);
+		//cout << "subEdge1:" << subEdge[0]->get(0)->getPosition() << subEdge[0]->get(1)->getPosition() << endl;
+		//cout << "subEdge2:" << subEdge[1]->get(0)->getPosition() << subEdge[1]->get(1)->getPosition() << endl;
+		//cout << "newEdge:" << newEdge->get(0)->getPosition() << newEdge->get(1)->getPosition() << endl;
+		//cout << endl;
 		return t;
 	}
 
 	Vertex** getVertices() {
-		Vertex* vertices[3];
+		Vertex** vertices = new Vertex*[3];
 		vertices[0] = edges[0]->get(0);
 		vertices[1] = edges[0]->get(1);
 		vertices[2] = edges[1]->getAnotherVertex(vertices[0]);
@@ -212,7 +229,7 @@ public:
 			subfaces[i] = getSubface(vertices[i]);
 		}
 		//add the center face
-		subfaces[4] = new Triface(newEdges[0], newEdges[1], newEdges[2]);
+		subfaces[3] = new Triface(newEdges[0], newEdges[1], newEdges[2]);
 
 		//the three new points are neighbours of each other
 		TriNeighbour(edges[0]->getMidPoint(), edges[1]->getMidPoint(), edges[2]->getMidPoint());
@@ -227,11 +244,32 @@ public:
 
 	void draw() {
 		Vertex** vertices = getVertices();
+		
+
 		glBegin(GL_TRIANGLES);
+		glNormal3fv(vertices[0]->getNormal().getPointer());
 		glVertex3fv(vertices[0]->getPosition().getPointer());
+
+		glNormal3fv(vertices[1]->getNormal().getPointer());
 		glVertex3fv(vertices[1]->getPosition().getPointer());
+
+		glNormal3fv(vertices[2]->getNormal().getPointer());
 		glVertex3fv(vertices[2]->getPosition().getPointer());
 		glEnd();
+	}
+
+	void computeNormal(Vec3f& backPoint) {
+		Vertex** vertices = getVertices();
+		Vec3f v1 = vertices[0]->getPosition() - vertices[1]->getPosition();
+		Vec3f v2 = vertices[1]->getPosition() - vertices[2]->getPosition();
+		Vec3f normal = v1 ^ v2;
+		normal.normalize();
+		Vec3f backDir = backPoint - vertices[0]->getPosition();
+		if (normal * backDir > 0)
+			normal = -normal;
+
+		for (int i = 0; i < 3; i++)
+			vertices[i]->addNormal(normal);
 	}
 };
 
@@ -240,36 +278,48 @@ private:
 	vector<Triface*> faces;
 	vector<Vertex*>vertices;
 	vector<Edge*> edges;
+	Vec3f center;//the center of the diamond,used to calculate the right direction of the normal
 public:
 	Diamond(Vec3f* positions) {
 		//#0 & #5: position of vertex points
 		//#1 ~ # 4: position of edge points	
-		for (int i = 0; i < 6; i++) 
+		for (int i = 0; i < 6; i++) {
 			vertices.push_back(new Vertex(positions[i]));
+			if(i != 0 && i != 5)
+				center += positions[i];
+			//cout << "vertex:" << vertices[i]->getPosition() << endl;
+		}
 		
+		center /= 4.0f;
 		//#0 ~ #3: upper pyramid edge
 		//#4 ~ #7: middle edge
 		//#8 ~ #11: lower pyramid edge
-		for (int i = 1; i < 5; i++)
+		int k = 0;
+		for (int i = 1; i < 5; i++) {//1,2,3,4
 			edges.push_back(new Edge(vertices[0], vertices[i]));
+		}
 		for (int i = 1; i < 5; i++) {
 			int next = i + 1;
 			if (next > 4)//loop back
 				next = 1;
 			edges.push_back(new Edge(vertices[i], vertices[next]));
 		}
-		for (int i = 1; i < 5; i++)
+		for (int i = 1; i < 5; i++) {
 			edges.push_back(new Edge(vertices[5], vertices[i]));
+		}
 
 		//add faces
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++) {
 			faces.push_back(new Triface(edges[i], edges[(i + 1) % 4], edges[i + 4]));
-		for (int i = 8; i < 12; i++)
-			faces.push_back(new Triface(edges[i], edges[(i - 8) % 4 + 8], edges[i - 4]));
+		}
+		for (int i = 8; i < 12; i++) {
+			faces.push_back(new Triface(edges[i], edges[(i - 7) % 4 + 8], edges[i - 4]));
+		}
 	}
 	void draw() {
-		for (Triface* t : faces)
+		for (Triface* t : faces) {
 			t->draw();
+		}
 	}
 	void split(int n) {
 		for (int i = 0; i < n; i++) {
@@ -279,29 +329,29 @@ public:
 				t->split();
 				t->addSubfaceToThis(newFaces);
 			}
-
 			//update the neighbour and the edges
 			for (Edge* e : edges) {
 				e->updateNeighbour();
 				e->addSubEdgeToThis(newEdges);
 			}
-
 			//averaging the old vertices
 			for (Vertex* v : vertices) 
 				v->average();
-			
+
 			for (Edge* e : edges)
 				e->addMidPointToThis(vertices);
-
 			//delete the old faces and edges
-			for (Triface* t : faces) 
+			for (Triface* t : faces)
 				delete t;
 			for (Edge* e : edges)
 				delete e;
-
 			faces = newFaces;
 			edges = newEdges;
 		}
+
+		for (Triface* t : faces)
+			t->computeNormal(center);
+
 	}
 };
 #endif
