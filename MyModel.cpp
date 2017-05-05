@@ -923,22 +923,20 @@ void MyModel::drwaComplexShape() {
 		pointBottom[i%5] = rotate72 * pointBottom[i - 1];
 		glVertex3d(0, 0, 0);
 		glVertex3d(pointBottom[i-1][0], pointBottom[i-1][1], pointBottom[i-1][2]);
-		//cout << pointBottom[i%5][0] << "," << pointBottom[i%5][1] << "," << pointBottom[i%5][2] << endl;
 		glVertex3d(pointBottom[i%5][0], pointBottom[i%5][1], pointBottom[i%5][2]);
 	}
 
 	Mat3f rotate36(cosf(angle36), 0, -sinf(angle36), 0, 1, 0, sinf(angle36), 0, cosf(angle36));
 	pointTop[0] = rotate36 * pointBottom[0];
 	pointTop[0][1] = 1;
-	glColor3ub(0, 0, 255);
+
 	for (int i = 1; i <= 5; i++) {
 		pointTop[i % 5] = rotate72 * pointTop[i - 1];
 		glVertex3d(0, 1, 0);
 		glVertex3d(pointTop[i - 1][0], pointTop[i - 1][1], pointTop[i - 1][2]);
-		//cout << pointTop[i % 5][0] << "," << pointTop[i % 5][1] << "," << pointTop[i % 5][2] << endl;
 		glVertex3d(pointTop[i % 5][0], pointTop[i % 5][1], pointTop[i % 5][2]);
 	}
-	glColor3ub(255, 0, 0);
+
 	setDiffuseColor(COLOR_RED);
 	for (int i = 1; i <= 5; i++) {
 		glVertex3d(pointTop[i - 1][0], pointTop[i - 1][1], pointTop[i - 1][2]);
@@ -975,20 +973,12 @@ void MyModel::initTexture() {
 		char* name = "./huaji.bmp";
 
 		unsigned char* temp = readBMP(name, textureWidth, textureHeight);
-		/*
-		texture = new GLubyte**[textureHeight];
-		for (int i = 0; i < textureHeight; i++) {
-			texture[i] = new GLubyte*[textureWidth];
-			for (int j = 0; j < textureWidth; j++)
-				texture[i][j] = new GLubyte[4];
-		}
-		*/
-		//cout << "width:" << textureWidth << ",height:" << textureHeight;
+
 		for (int row = 0; row < textureHeight; row++) {
 			for (int col = 0; col < textureWidth; col++) {
 				for (int i = 0; i < 3; i++)
 					texture[row][col][i] = temp[(row * textureWidth + col) * 3 + i];
-				//cout << "("<<texture[row][col][0] << "," << texture[row][col][1] << "," << texture[row][col][2]<<")";
+
 				texture[row][col][3] = 255;
 			}
 		}
@@ -1072,7 +1062,6 @@ void MyModel::loadHeightField() {
 	int colorIndex = 0;
 	for (int Z = 0; Z < height - 2; Z = Z + 3) {
 		for (int X = 0; X < width - 2; X = X + 3) {
-
 			vertexColor[colorIndex] = heightFieldColor[(Z * width + X) * 3];
 			vertexColor[colorIndex + 1] = heightFieldColor[(Z * width + X) * 3 + 1];
 			vertexColor[colorIndex + 2] = heightFieldColor[(Z * width + X) * 3 + 2];
@@ -1083,7 +1072,6 @@ void MyModel::loadHeightField() {
 			float y = (float(greyScaleMap[Z * width + X]) / 255.0f);
 			heightFieldPoints[index] = Vec3f(x, y, z);
 			index++;
-			//mesh->addMaterial(m);
 		}
 	}
 	
