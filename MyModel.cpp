@@ -105,8 +105,8 @@ public:
 		cin >> hinata;
 		if (hinata < 0)
 			hinata = 0;
-		if (hinata > 8)
-			hinata = 8;
+		if (hinata > 3)
+			hinata = 3;
 		d->split(hinata);
 	}
 	~MyModel() {
