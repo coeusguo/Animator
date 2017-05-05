@@ -84,8 +84,11 @@ public:
 		hasBeenAdded = false;
 
 		//v1 and v2 are now new neighbours 
-		v1->addNeightBour(v2);
-		v2->addNeightBour(v1);
+	}
+
+	void setNeighbour() {
+		vertices[0]->addNeightBour(vertices[1]);
+		vertices[1]->addNeightBour(vertices[0]);
 	}
 
 	void addMidPoint() {
@@ -94,6 +97,8 @@ public:
 		midPoint = new Vertex((vertices[0]->getPosition() + vertices[1]->getPosition()) / 2.0f);
 		subEdges[0] = new Edge(vertices[0], midPoint);
 		subEdges[1] = new Edge(midPoint, vertices[1]);
+		midPoint->addNeightBour(vertices[0]);
+		midPoint->addNeightBour(vertices[1]);
 	}
 
 	void addFaces(Triface* face) {
@@ -143,6 +148,7 @@ public:
 		hasBeenAdded = true;
 		list.push_back(this);
 	}
+
 	void addMidPointToThis(vector<Vertex*>& list) {
 		list.push_back(midPoint);
 	}
@@ -296,16 +302,22 @@ public:
 		//#8 ~ #11: lower pyramid edge
 		int k = 0;
 		for (int i = 1; i < 5; i++) {//1,2,3,4
-			edges.push_back(new Edge(vertices[0], vertices[i]));
+			Edge* e = new Edge(vertices[0], vertices[i]);
+			e->setNeighbour();
+			edges.push_back(e);
 		}
 		for (int i = 1; i < 5; i++) {
 			int next = i + 1;
 			if (next > 4)//loop back
 				next = 1;
-			edges.push_back(new Edge(vertices[i], vertices[next]));
+			Edge* e = new Edge(vertices[i], vertices[next]);
+			e->setNeighbour();
+			edges.push_back(e);
 		}
 		for (int i = 1; i < 5; i++) {
-			edges.push_back(new Edge(vertices[5], vertices[i]));
+			Edge* e = new Edge(vertices[5], vertices[i]);
+			e->setNeighbour();
+			edges.push_back(e);
 		}
 
 		//add faces

@@ -59,14 +59,14 @@ public:
 		loadHeightField();
 
 		Vec3f position[6];
-		position[0] = Vec3f(2, 3, 2);
+		position[0] = Vec3f(0, 2, 0);
 
-		position[1] = Vec3f(3, 2, 3);
-		position[2] = Vec3f(3, 2, 1);
-		position[3] = Vec3f(1, 2, 1);
-		position[4] = Vec3f(1, 2, 3);
+		position[1] = Vec3f(1, 1, 1);
+		position[2] = Vec3f(1, 1, -1);
+		position[3] = Vec3f(-1, 1, -1);
+		position[4] = Vec3f(-1, 1, 1);
 
-		position[5] = Vec3f(2, 1, 2);
+		position[5] = Vec3f(0, 0, 0);
 
 		cout << "do you wang to adjust vertices?(1 for true/0 for false)" << endl;
 		bool adjust;
@@ -85,7 +85,7 @@ public:
 		cout << "do you want to adjust averaging mask?(1 for true/0 for false)" << endl;
 		cin >> adjust;
 		if (!adjust) {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 4; i++) {
 				float k = 1.5;
 				if (i % 2 == 0)
 					k = 0.5;
@@ -100,7 +100,14 @@ public:
 			}
 
 		}
-		d->split(2);
+		cout << "how many layers?" << endl;
+		int hinata;
+		cin >> hinata;
+		if (hinata < 0)
+			hinata = 0;
+		if (hinata > 8)
+			hinata = 8;
+		d->split(hinata);
 	}
 	~MyModel() {
 		delete rightArm;
@@ -391,7 +398,7 @@ void MyModel::draw()
 	if(VAL(HEIGHTFIELD))
 		drawHeightField();
 
-	drawSubDivSurface();
+	
 }
 
 int main()
@@ -629,10 +636,16 @@ void MyModel::drawHead() {
 		glTranslated(0.0, 0.0, 0.01);
 		drawCylinder(0.50, 0.59, 0.59);
 		glDisable(GL_TEXTURE_2D);
-	
+		
 		glPopMatrix();
 
 		glPopMatrix();
+		glPushMatrix();
+		glTranslated(0, 1.5, 0);
+		drawSubDivSurface();
+		glPopMatrix();
+
+		
 	}
 	/*glPushMatrix();
 	glTranslated(0, 0, 0.51);
